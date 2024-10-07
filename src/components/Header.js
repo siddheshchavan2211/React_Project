@@ -1,8 +1,10 @@
-import {useState} from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 const Header = () => {
-  let[Toggle,SetToggle]=useState(false);
-  
-   return <div className="navbar">
+  let [Toggle, SetToggle] = useState(false);
+
+  return (
+    <div className="navbar">
       <a href="/">
         <img
           className="logo"
@@ -12,18 +14,34 @@ const Header = () => {
       </a>
       <div className="listitems">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact us</li>
+          <li>
+            <Link to="/" className="no-decoration">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="no-decoration">
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="no-decoration">
+              Contact us
+            </Link>
+          </li>
           <li>Cart</li>
         </ul>
       </div>
-      {Toggle?(
-      <button className="login"onClick={()=>SetToggle(false)}>LoggedIn</button>
-      ):(
-      <button className="logout"onClick={()=>SetToggle(true)}>LogOut</button>
+      {Toggle ? (
+        <button className="login" onClick={() => SetToggle(false)}>
+          LoggedIn
+        </button>
+      ) : (
+        <button className="logout" onClick={() => SetToggle(true)}>
+          LogOut
+        </button>
       )}
     </div>
-    
+  );
 };
-export default Header;  
+export default Header;

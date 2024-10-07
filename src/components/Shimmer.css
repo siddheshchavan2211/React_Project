@@ -1,0 +1,10 @@
+.productlist2 {
+  height: 350px !important;
+  background: rgb(193, 189, 189);
+  margin: 40px;
+  width: 260px;
+}
+.shimmerui {
+  display: flex;
+  flex-wrap: wrap;
+}
