@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Cards from "./card";
 import Shimmer from "./Shimmer";
+import { json, Link } from "react-router-dom";
 
 function filterfunction(defaultvalue, filtersearch) {
   return filtersearch.filter((item) =>
@@ -20,7 +21,7 @@ const Body = () => {
     const json = await data.json();
     setNewFilterSearch(json?.products);
     setNewallValue(json?.products);
-    console.log(json);
+    // console.log(json);
   }
   if (!NewallValue) return null;
   return NewallValue?.length === 0 ? (
@@ -47,8 +48,12 @@ const Body = () => {
       <div className="productlist">
         {/* {if(filtersearch) return <h1>No products found</h1>} */}
 
-        {filtersearch.map((camera, index) => {
-          return <Cards {...camera} key={index} />;
+        {filtersearch.map((camera) => {
+          return (
+            <Link to={"/trackparams/" + camera.id} key={camera.id}>
+              <Cards {...camera} />;
+            </Link>
+          );
         })}
       </div>
     </>
