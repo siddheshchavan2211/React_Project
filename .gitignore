@@ -3,3 +3,5 @@
 /node_modules
 heap-20240903-211101-main.heapsnapshot
 heap-20240903-211101-worker1.heapsnapshot
+
+/coverage

@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useApiCall from "../../Utils/useApiCall";
+import { useDispatch } from "react-redux";
+import { addtocart } from "../../Utils/CartSlice";
 const Trackparams = () => {
   const { id } = useParams();
-  const [reference, setreference] = useState(null);
-
-  useEffect(() => {
-    Displaydetails();
-  }, []);
-
-  async function Displaydetails() {
-    const data = await fetch(`https://dummyjson.com/products/${id}`);
-    const json = await data.json();
-    // console.log(json);
-    setreference(json);
-  }
+  const reference = useApiCall(id);
+  const dispatch = useDispatch();
+  const handleitem = (camera) => {
+    dispatch(addtocart(camera));
+  };
   if (!reference) {
     return <h1>Loading...</h1>;
   }
@@ -24,12 +19,18 @@ const Trackparams = () => {
         <h2>Title: {reference.title}</h2>
         {reference.images && reference.images[0] && (
           <img
-            className="img2"
+            className="img2 w-80"
             src={reference.images[0]}
             alt={reference.title}
             loading="lazy" // Add lazy loading here
           />
         )}
+        <button
+          className="p-4 m-4 bg-green-100"
+          onClick={() => handleitem(camera)}
+        >
+          Add to Cart
+        </button>
 
         <h2>Price:{reference.price}$</h2>
         <h2>Category:{reference.category}</h2>

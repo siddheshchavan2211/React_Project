@@ -1,43 +1,55 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../../Utils/userContext";
+import { useSelector } from "react-redux";
 const Header = () => {
   let [Toggle, SetToggle] = useState(false);
-
+  const { user } = useContext(UserContext);
+  const CartItems = useSelector((Store) => Store.cart.items);
+  console.log(CartItems);
   return (
-    <div className="navbar">
+    <div className="flex justify-between shadow-2xl items-center w-[92%] mx-auto">
       <a href="/">
         <img
-          className="logo"
+          className="size-24 p-2 rounded-full "
           alt="logo"
           src="https://static.vecteezy.com/system/resources/previews/009/022/752/non_2x/sid-logo-sid-letter-sid-letter-logo-design-initials-sid-logo-linked-with-circle-and-uppercase-monogram-logo-sid-typography-for-technology-business-and-real-estate-brand-vector.jpg"
         ></img>{" "}
       </a>
-      <div className="listitems">
-        <ul>
+      <div className="">
+        <ul className="flex gap-5 py-8 text-white">
           <li>
-            <Link to="/" className="no-decoration">
+            <Link to="/" className="">
               Home
             </Link>
           </li>
           <li>
-            <Link to="/about" className="no-decoration">
+            <Link to="/about" className="">
               About Us
             </Link>
           </li>
           <li>
-            <Link to="/contact" className="no-decoration">
+            <Link to="/contact" className="">
               Contact us
             </Link>
           </li>
-          <li>Cart</li>
+          <li>
+            <Link to="/instamart" className="">
+              Instamart
+            </Link>
+          </li>
+          <li>
+            <Link to="/cart">Cart- {CartItems.length}</Link>
+          </li>
         </ul>
       </div>
+      {user.name}
       {Toggle ? (
-        <button className="login" onClick={() => SetToggle(false)}>
+        <button className="pr-5 text-white" onClick={() => SetToggle(false)}>
           LoggedIn
         </button>
       ) : (
-        <button className="logout" onClick={() => SetToggle(true)}>
+        <button className="pr-5 text-white " onClick={() => SetToggle(true)}>
           LogOut
         </button>
       )}
